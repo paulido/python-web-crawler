@@ -12,7 +12,7 @@ class LefasoSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        for article in response.css('div[class="col-xs-12 col-sm-12 col-md-6 col-lg-6"]'):
+        for article in response.css("h3 a::text"):
             yield {
-                'title' : article.css('a[href^="spip.php?article1"]::text').get(),
+                'title' : article.getall(),
             }
